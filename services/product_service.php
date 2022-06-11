@@ -11,7 +11,7 @@
 
 	function get_user_basket($id)
 	{
-		
+
 	}
 
 	function show_product($obj)
@@ -59,6 +59,19 @@
 			return -1;
 		while ($obj = $res->fetch_object())
 			show_product($obj);
+	}
+
+	function get_all_products()
+	{
+		$connection = connect_to_database();
+		$query = "SELECT * FROM `products`;";
+		$res = $connection->query($query);
+		if(!$res)
+			return -1;
+		$i = 0;
+		while ($obj[$i] = $res->fetch_object())
+			$i++;
+		return $obj;
 	}
 
 ?>
