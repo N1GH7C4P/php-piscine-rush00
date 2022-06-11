@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: 11.06.2022 klo 10:29
+-- Generation Time: 11.06.2022 klo 13:50
 -- Palvelimen versio: 10.4.21-MariaDB
 -- PHP Version: 7.4.29
 
@@ -70,7 +70,9 @@ INSERT INTO `images` (`id`, `uploader_id`, `name`, `timestamp`, `is_profile_pic`
 (1, 2, 'Default', '2022-06-03 13:27:06', 1),
 (2, 5, 'hylje', '2022-06-10 12:08:51', 1),
 (4, 6, 'Kasvi', '2022-06-10 12:08:32', 1),
-(5, 8, 'saukko', '2022-06-10 12:09:43', 1);
+(5, 8, 'saukko', '2022-06-10 12:09:43', 1),
+(6, 2, 'Shirt', '2022-06-11 12:33:47', 0),
+(7, 2, 'Pants', '2022-06-11 12:35:00', 0);
 
 -- --------------------------------------------------------
 
@@ -109,8 +111,38 @@ CREATE TABLE `products` (
   `name` varchar(20) NOT NULL,
   `quantity` int(11) NOT NULL,
   `date_added` timestamp NOT NULL DEFAULT current_timestamp(),
-  `image_id` int(11) NOT NULL
+  `image_id` int(11) NOT NULL,
+  `category` int(11) NOT NULL,
+  `description` varchar(100) NOT NULL,
+  `price` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Vedos taulusta `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `quantity`, `date_added`, `image_id`, `category`, `description`, `price`) VALUES
+(1, 'Cool pants', 12, '2022-06-11 12:45:29', 7, 1, 'Very trendy, brown pants with preinstalled pockets for all of your butt covering needs.', 29.95),
+(2, 'Work shirt', 9, '2022-06-11 12:47:01', 6, 2, 'A blue, workplace safe shirt to impress your co-workers and boss.', 14.95);
+
+-- --------------------------------------------------------
+
+--
+-- Rakenne taululle `product_categories`
+--
+
+CREATE TABLE `product_categories` (
+  `id` int(11) NOT NULL,
+  `name` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Vedos taulusta `product_categories`
+--
+
+INSERT INTO `product_categories` (`id`, `name`) VALUES
+(1, 'pants'),
+(2, 'shirts');
 
 -- --------------------------------------------------------
 
@@ -184,7 +216,14 @@ ALTER TABLE `order_products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `Products image` (`image_id`);
+  ADD KEY `Products image` (`image_id`),
+  ADD KEY `Products category` (`category`);
+
+--
+-- Indexes for table `product_categories`
+--
+ALTER TABLE `product_categories`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -213,7 +252,7 @@ ALTER TABLE `basket_item`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `order_details`
@@ -231,7 +270,13 @@ ALTER TABLE `order_products`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `product_categories`
+--
+ALTER TABLE `product_categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -279,6 +324,7 @@ ALTER TABLE `order_products`
 -- Rajoitteet taululle `products`
 --
 ALTER TABLE `products`
+  ADD CONSTRAINT `Products category` FOREIGN KEY (`category`) REFERENCES `product_categories` (`id`),
   ADD CONSTRAINT `Products image` FOREIGN KEY (`image_id`) REFERENCES `images` (`id`);
 COMMIT;
 

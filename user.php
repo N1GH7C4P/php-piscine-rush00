@@ -26,5 +26,6 @@
 	<a href="logout.php">logout</a>
 	<a href="shop.php">shop</a>
 	<a href="checkout.php">checkout</a>
+	<a href="basket.php">basket</a>
 </body>
 </html>
