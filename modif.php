@@ -30,10 +30,7 @@ if ($submit_ok == 1)
 	{
 		$ret = set_new_password($login, $newpw);
 		if($ret == 1)
-		{
-			echo("OK\n");
 			header("Location: index.php?modif=".$login);
-		}
 		else
 			header("Location: index.php?modif=failure");
 	}

@@ -15,6 +15,8 @@
 			echo '<div> Username has been already taken! </div>';
 		else if ($key === "create")
 			echo '<div> User '.$value.' created</div>';
+		else if ($key === "error")
+			echo '<div> Error: '.$value.'</div>';
 	}
 ?>
 
@@ -24,7 +26,7 @@
 </head>
 <body>
 
-<h1>Welcome to Camagru!</h1>
+<h1>Welcome to webshop!</h1>
 	<div class="form-style-3">
 	<fieldset><legend>Please login</legend>
 		<form action="controllers/login_controller.php" method="post">
