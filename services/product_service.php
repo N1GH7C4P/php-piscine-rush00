@@ -149,12 +149,7 @@
 		LEFT JOIN `users` ON `users`.`id`=`basket`.`user_id`
 		WHERE `users`.`id`=".$user_id.";";
 		$res = $connection->query($query);
-		if(!$res)
-			return NULL;
-		$i = 0;
-		while ($arr[$i] = $res->fetch_array())
-			$i++;
-		return $arr;
+		return ($res->fetch_array());
 	}
 
 	function show_product($arr)

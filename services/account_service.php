@@ -67,7 +67,7 @@ function get_pass_by_login($login)
 	$query = "SELECT `password` FROM USERS WHERE `name`='".$login."'";
 	$result = $connection->query($query);
 	while ($obj = $result->fetch_array())
-		$password = $obj->password;
+		$password = $obj[0];
 	$connection-> close();
 	return $password;
 }
@@ -76,6 +76,9 @@ function auth($login, $password)
 {
 	$hash = strtolower(hash('whirlpool', $password));
 	$password = strtolower(get_pass_by_login($login));
+	echo("hash1: ".$hash);
+	echo("<br>");
+	echo("hash2: ".$password);
 	if ($hash === $password)
 		return (1);
 	else

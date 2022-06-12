@@ -15,6 +15,11 @@ include_once 'services/image_service.php';
 		<h2> Our products </h2>
 		<div>
 			<?php show_all_products()?>
+			<br>
+			<a href="logout.php">logout</a>
+			<a href="shop.php">shop</a>
+			<a href="checkout.php">checkout</a>
+			<a href="basket.php">basket</a>
 		</div>
 	</div>
 </body>
