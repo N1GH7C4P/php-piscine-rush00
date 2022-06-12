@@ -11,9 +11,9 @@
 		$res = $connection->query($query);
 		if(!$res)
 			return -1;
-		$product_obj = $res->fetch_object();
+		$product_obj = $res->fetch_array();
 		if($product_obj)
-			return($product_obj->quantity);
+			return($product_obj[2]);
 		return -1;
 	}
 
@@ -45,8 +45,8 @@
 		$connection->close();
 		if(!$res)
 			return NULL;
-		while ($obj = $res->fetch_object())
-			return $obj->quantity;
+		$arr = $res->fetch_array();
+		return $arr[4];
 	}
 
 	function create_basket_item($basket_id, $product_id, $quantity)
@@ -115,7 +115,6 @@
 		}
 		$basket_id = $basket_obj->id;
 		$product_price = get_product_price($product_id);
-		echo("nb: ".$quantity." unit_price: ".$product_price." total: ".$quantity * $product_price);
 		update_basket_price($basket_id, $quantity * $product_price);
 		create_basket_item($basket_id, $product_id, $quantity);
 		remove_from_inventory($product_id, $quantity);
@@ -126,12 +125,8 @@
 		$connection = connect_to_database();
 
 		$query = "INSERT INTO `basket` (`id`, `user_id`, `price_total`, `creation_time`) VALUES (NULL, ".$user_id.", '0', current_timestamp());";
-		$res = $connection->query($query);
+		$connection->query($query);
 		$connection->close();
-		if(!$res)
-			return NULL;
-		while ($obj = $res->fetch_object())
-			return $obj;
 	}
 
 	function get_user_basket($id)
@@ -141,8 +136,8 @@
 		$res = $connection->query($query);
 		if(!$res)
 			return NULL;
-		while ($obj = $res->fetch_object())
-			return $obj;
+		while ($arr = $res->fetch_array())
+			return $arr;
 	}
 
 	function get_products_in_users_basket($user_id)
@@ -157,19 +152,19 @@
 		if(!$res)
 			return NULL;
 		$i = 0;
-		while ($obj[$i] = $res->fetch_object())
+		while ($arr[$i] = $res->fetch_array())
 			$i++;
-		return $obj;
+		return $arr;
 	}
 
-	function show_product($obj)
+	function show_product($arr)
 	{
-		echo("<div> <b>".$obj->name."</b> </div>");
-		show_image($obj->image_id);
-		echo("<div>".$obj->description."</div>");
-		echo("<div>".$obj->price."<div>");
+		echo("<div> <b>".$arr[1]."</b> </div>");
+		show_image($arr[4]);
+		echo("<div>".$arr[6]."</div>");
+		echo("<div>".$arr[7]."<div>");
 		echo('
-			<form action="controllers/product_controller.php?product_id='.$obj->id.'" method="post">
+			<form action="controllers/product_controller.php?product_id='.$arr->id.'" method="post">
 				<label for="field1"><span>Quantity <span class="required">*</span></span><input type="number" name="quantity" id="quantity" value="" required>
 				<input type="submit" name=submit value="Add to basket">
 			</form>'
@@ -184,8 +179,8 @@
 		$connection->close();
 		if(!$res)
 			return -1;
-		while ($obj = $res->fetch_object())
-			show_product($obj);
+		while ($arr = $res->fetch_array())
+			show_product($arr);
 	}
 
 	function get_product_price($id)
@@ -196,8 +191,8 @@
 		$connection->close();
 		if(!$res)
 			return -1;
-		while ($obj = $res->fetch_object())
-			return($obj->price);
+		while ($arr = $res->fetch_array())
+			return($arr->price);
 	}
 
 	function get_product_by_id($id)
@@ -208,8 +203,8 @@
 		$connection->close();
 		if(!$res)
 			return -1;
-		while ($obj = $res->fetch_object())
-			return($obj);
+		while ($arr = $res->fetch_array())
+			return($arr);
 	}
 
 	function show_all_products()
@@ -220,8 +215,11 @@
 		$connection->close();
 		if(!$res)
 			return -1;
-		while ($obj = $res->fetch_object())
-			show_product($obj);
+		$i = 0;
+		while ($arr[$i] = $res->fetch_array())
+		{
+			show_product($arr[$i]);
+		}
 	}
 
 	function get_all_products()
@@ -233,8 +231,10 @@
 		if(!$res)
 			return -1;
 		$i = 0;
-		while ($obj[$i] = $res->fetch_object())
+		while ($arr[$i] = $res->fetch_array())
+		{
 			$i++;
-		return $obj;
+		}
+		return $arr;
 	}
 ?>

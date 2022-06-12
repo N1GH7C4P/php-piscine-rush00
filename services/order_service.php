@@ -17,7 +17,7 @@
 		$query = "SELECT * FROM `order_details` LEFT JOIN `users` ON `order_details`.`user_id`=`users`.`id` WHERE `users`.`id`=".$user_id.";";
 		$res = $connection->query($query);
 		$i = 0;
-		while ($obj[$i] = $res->fetch_object())
+		while ($obj[$i] = $res->fetch_array())
 			$i++;
 		return $obj;
 	}

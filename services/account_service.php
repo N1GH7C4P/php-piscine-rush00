@@ -7,7 +7,7 @@ function set_new_password($login, $newpw)
 	$connection = connect_to_database();
 	$query = "SELECT `name` FROM USERS WHERE `name`='".$login."'";
 	$result = $connection->query($query);
-	while ($obj = $result->fetch_object())
+	while ($obj = $result->fetch_array())
 		$name = $obj->name;
 	if($name)
 	{
@@ -38,7 +38,7 @@ function add_account($login, $passwd)
 	$connection = connect_to_database();
 	$query = "SELECT `name` FROM USERS WHERE `name`='".$login."'";
 	$result = $connection->query($query);
-	while ($obj = $result->fetch_object())
+	while ($obj = $result->fetch_array())
 		$name = $obj->name;
 	if($name)
 	{
@@ -55,7 +55,7 @@ function get_id_by_login($login)
 		$connection = connect_to_database();
 		$query = "SELECT `id` FROM USERS WHERE `name`='".$login."'";
 		$result = $connection->query($query);
-		while ($obj = $result->fetch_object())
+		while ($obj = $result->fetch_array())
 			$id = $obj->id;
 		$connection-> close();
 		return $id;
@@ -66,7 +66,7 @@ function get_pass_by_login($login)
 	$connection = connect_to_database();
 	$query = "SELECT `password` FROM USERS WHERE `name`='".$login."'";
 	$result = $connection->query($query);
-	while ($obj = $result->fetch_object())
+	while ($obj = $result->fetch_array())
 		$password = $obj->password;
 	$connection-> close();
 	return $password;

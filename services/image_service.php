@@ -32,7 +32,7 @@ function get_user_profile_pic_id($login)
 	$res = $connection->query($query);
 	if(!$res)
 		return -1;
-	while ($obj = $res->fetch_object())
+	while ($obj = $res->fetch_array())
 		$image_id = $obj->id;
 	return($image_id);
 }
