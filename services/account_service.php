@@ -76,9 +76,9 @@ function auth($login, $password)
 {
 	$hash = strtolower(hash('whirlpool', $password));
 	$password = strtolower(get_pass_by_login($login));
-	echo("hash1: ".$hash);
-	echo("<br>");
-	echo("hash2: ".$password);
+	//echo("hash1: ".$hash);
+	//echo("<br>");
+	//echo("hash2: ".$password);
 	if ($hash === $password)
 		return (1);
 	else
