@@ -21,7 +21,7 @@
 		{
 			$_SESSION['loggued_on_user'] = $login;
 			echo '<div> User '.$login.' logged in.</div>';
-			header("Location: ../user.php?user=".$login);
+			header("Location: ../shop.php");
 		}
 		else
 		{

@@ -13,5 +13,5 @@
 		place_an_order($user);
 		header("Location: orders.php?user=".$user);
 	}
-	header("Location: index.php?error=error_placing_order");
+	header("Location: ../index.php?error=error_placing_order");
 ?>

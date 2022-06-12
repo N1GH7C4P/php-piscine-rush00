@@ -25,14 +25,20 @@ include_once 'services/account_service.php';
 				$i = 0;
 				while($products[$i])
 				{
-					var_dump($products[$i]);
 					echo($products[$i]['name']."<br>");
 					show_image($products[$i]['image_id']);
 					echo($products[$i]['description']);
 					$i++;
 				}
-				echo($basket['total_price']);
+				echo("<br> <b> total price: ".$basket['price_total']."</b>");
+				echo('<form action="controllers/order_controller.php" method="post">
+						<input type="submit" name=submit value="Order items">
+					</form>');
 			?>
+			<br>
+			<a href="logout.php">logout</a>
+			<a href="shop.php">shop</a>
+			<a href="basket.php">basket</a>
 		</div>
 	</div>
 </body>

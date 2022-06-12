@@ -15,6 +15,8 @@
 			echo '<div> Username has been already taken! </div>';
 		else if ($key === "create")
 			echo '<div> User '.$value.' created</div>';
+		else if ($key === "error" && $value === "error_placing_order")
+			echo 'Thank you for your order! :) Please log back in!';
 		else if ($key === "error")
 			echo '<div> Error: '.$value.'</div>';
 	}
