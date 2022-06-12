@@ -28,9 +28,9 @@ function create_account($login, $passwd, $connection)
 {
 	$hash = strtolower(hash('whirlpool', $passwd));
 	$query = "INSERT INTO `users` (`id`, `name`, `password`) VALUES (NULL,'".$login."','".$hash."')";
+	$connection->query($query);
 	$user_id = get_id_by_login($login);
 	create_basket($user_id);
-	$connection->query($query);
 }
 
 function add_account($login, $passwd)
@@ -38,8 +38,8 @@ function add_account($login, $passwd)
 	$connection = connect_to_database();
 	$query = "SELECT `name` FROM USERS WHERE `name`='".$login."'";
 	$result = $connection->query($query);
-	while ($obj = $result->fetch_array())
-		$name = $obj->name;
+	$obj = $result->fetch_array();
+	$name = $obj[1];
 	if($name)
 	{
 		echo($name);
@@ -55,10 +55,9 @@ function get_id_by_login($login)
 		$connection = connect_to_database();
 		$query = "SELECT `id` FROM USERS WHERE `name`='".$login."'";
 		$result = $connection->query($query);
-		while ($obj = $result->fetch_array())
-			$id = $obj->id;
-		$connection-> close();
-		return $id;
+		$obj = $result->fetch_array();
+		$connection->close();
+		return $obj[0];
 	}
 
 function get_pass_by_login($login)
@@ -76,9 +75,6 @@ function auth($login, $password)
 {
 	$hash = strtolower(hash('whirlpool', $password));
 	$password = strtolower(get_pass_by_login($login));
-	//echo("hash1: ".$hash);
-	//echo("<br>");
-	//echo("hash2: ".$password);
 	if ($hash === $password)
 		return (1);
 	else

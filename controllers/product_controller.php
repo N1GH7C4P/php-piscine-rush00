@@ -12,12 +12,11 @@
 		if($key === "quantity")
 			$quantity = filter_var($value, FILTER_VALIDATE_INT);
 	}
-
 	$product = get_product_by_id($product_id);
 
 	if(!$product)
 		header("Location: ../index.php?error=no_such_product");
-	if($quantity > $product->quantity)
+	if($quantity > $product[2])
 		header("Location: ../index.php?error=insufficient_inventory");
 	else
 		header("Location: basket_controller.php?id=".$product_id."&quantity=".$quantity)

@@ -7,7 +7,7 @@ function connect_to_database()
 	$db_pass = 'mh5KF7xd';
 	$db_name = 'rush00';
 
-	$connection = new mysqli($db_host, $db_user, $db_pass, $db_name);
+	$connection = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 	return ($connection);
 }
 

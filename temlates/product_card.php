@@ -40,10 +40,10 @@
 				')
 				?>
 			</div>
-
+			<?php foreach ($array as $product=>$value) : ?>
 			<div class="product-card">
 				<div class="product-name">
-					<h2>fjällräven vardag</h2>
+					<h2><?php echo $product ?></h2>
 				</div>
 				<div class="product-img">
 					<img
@@ -61,6 +61,7 @@
 					<input type="submit" name="submit" value="Add to basket" />
 				</form>
 			</div>
+			<?php endforeach; ?>
 
 			<div class="product-card">
 				<div class="product-name">

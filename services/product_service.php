@@ -11,9 +11,10 @@
 		$res = $connection->query($query);
 		if(!$res)
 			return -1;
-		$product_obj = $res->fetch_array();
-		if($product_obj)
-			return($product_obj[2]);
+		$arr = $res->fetch_array();
+		print_r($arr);
+		if($arr)
+			return($arr[2]);
 		return -1;
 	}
 
@@ -94,10 +95,10 @@
 	function remove_product_from_users_basket($login, $product_id)
 	{
 		$user_id = get_id_by_login($login);
-		$basket_obj = get_user_basket($user_id);
-		if(!$basket_obj)
+		$basket_arr = get_user_basket($user_id);
+		if(!$basket_arr)
 			return -1;
-		$basket_id = $basket_obj->id;
+		$basket_id = $basket_arr[0];
 		$quantity = get_nb_of_product_in_user_basket($user_id, $product_id);
 		remove_basket_item($basket_id, $product_id);
 		if($quantity)
@@ -105,15 +106,10 @@
 	}
 
 	function add_product_to_users_basket($login, $product_id, $quantity)
-	{
+	{	
 		$user_id = get_id_by_login($login);
-		$basket_obj = get_user_basket($user_id);
-		if(!$basket_obj)
-		{
-			create_basket($user_id);
-			$basket_obj = get_user_basket($user_id);
-		}
-		$basket_id = $basket_obj->id;
+		$basket_arr = get_user_basket($user_id);
+		$basket_id = $basket_arr[0];
 		$product_price = get_product_price($product_id);
 		update_basket_price($basket_id, $quantity * $product_price);
 		create_basket_item($basket_id, $product_id, $quantity);
@@ -123,7 +119,6 @@
 	function create_basket($user_id)
 	{
 		$connection = connect_to_database();
-
 		$query = "INSERT INTO `basket` (`id`, `user_id`, `price_total`, `creation_time`) VALUES (NULL, ".$user_id.", '0', current_timestamp());";
 		$connection->query($query);
 		$connection->close();
@@ -134,10 +129,13 @@
 		$connection = connect_to_database();
 		$query = "SELECT * FROM `basket` WHERE `user_id`=".$id.";";
 		$res = $connection->query($query);
-		if(!$res)
-			return NULL;
-		while ($arr = $res->fetch_array())
+		if($res)
+		{
+			$arr = $res->fetch_array();
 			return $arr;
+		}
+		else
+			return(NULL);
 	}
 
 	function get_products_in_users_basket($user_id)
@@ -149,7 +147,13 @@
 		LEFT JOIN `users` ON `users`.`id`=`basket`.`user_id`
 		WHERE `users`.`id`=".$user_id.";";
 		$res = $connection->query($query);
-		return ($res->fetch_array());
+		$i = 0;
+		while($res->fetch_array())
+		{
+			$arr[$i] = $res->fetch_array();
+			$i++;
+		}
+		return ($arr);
 	}
 
 	function show_product($arr)
@@ -159,7 +163,7 @@
 		echo("<div>".$arr[6]."</div>");
 		echo("<div>".$arr[7]."<div>");
 		echo('
-			<form action="controllers/product_controller.php?product_id='.$arr->id.'" method="post">
+			<form action="controllers/product_controller.php?product_id='.$arr[0].'" method="post">
 				<label for="field1"><span>Quantity <span class="required">*</span></span><input type="number" name="quantity" id="quantity" value="" required>
 				<input type="submit" name=submit value="Add to basket">
 			</form>'
@@ -186,8 +190,8 @@
 		$connection->close();
 		if(!$res)
 			return -1;
-		while ($arr = $res->fetch_array())
-			return($arr->price);
+		$arr = $res->fetch_array();
+		return($arr['price']);
 	}
 
 	function get_product_by_id($id)
@@ -196,10 +200,8 @@
 		$query = "SELECT * FROM `products` WHERE `id`=".$id.";";
 		$res = $connection->query($query);
 		$connection->close();
-		if(!$res)
-			return -1;
-		while ($arr = $res->fetch_array())
-			return($arr);
+		$arr = $res->fetch_array();
+		return($arr);
 	}
 
 	function show_all_products()
@@ -210,10 +212,9 @@
 		$connection->close();
 		if(!$res)
 			return -1;
-		$i = 0;
-		while ($arr[$i] = $res->fetch_array())
+		while ($arr = $res->fetch_array())
 		{
-			show_product($arr[$i]);
+			show_product($arr);
 		}
 	}
 
