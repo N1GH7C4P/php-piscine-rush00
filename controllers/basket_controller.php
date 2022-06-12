@@ -9,7 +9,7 @@
 		if ($key === "id")
 			$product_id = $value;
 		if ($key === "quantity")
-			$quantity = $value;
+			$quantity = filter_var($value, FILTER_VALIDATE_INT);
 	}
 	if ($product_id && $quantity && $_SESSION['loggued_on_user'])
 		add_product_to_users_basket($_SESSION['loggued_on_user'], $product_id, $quantity);

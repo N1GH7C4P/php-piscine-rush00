@@ -21,7 +21,13 @@ include_once 'services/account_service.php';
 				if(!$user)
 					header("Location: index.php?error=not_logged_in");
 				$products = get_products_in_users_basket(get_id_by_login($user));
+				//echo("<b> products in basket </b>");
 				print_r($products);
+				//$basket = get_user_basket(get_id_by_login($user));
+				echo("img_id: ".$products[0]->image_id);
+				show_image($products[0]->image_id);
+				//echo("<b> products in basket </b>");
+				//print_r($basket);
 			?>
 		</div>
 	</div>

@@ -115,7 +115,7 @@
 		}
 		$basket_id = $basket_obj->id;
 		$product_price = get_product_price($product_id);
-		//echo("nb: ".$quantity." unit_price: ".$product_price." total: ".$quantity * $product_price);
+		echo("nb: ".$quantity." unit_price: ".$product_price." total: ".$quantity * $product_price);
 		update_basket_price($basket_id, $quantity * $product_price);
 		create_basket_item($basket_id, $product_id, $quantity);
 		remove_from_inventory($product_id, $quantity);
