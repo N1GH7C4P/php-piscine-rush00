@@ -23,9 +23,7 @@ if ($submit_ok == 1)
 		echo("Error\n");
 		return (-1);
 	}
-	echo("authentication: ");
 	$ret = auth($login, $oldpw);
-	echo("ret: ".$ret);
 	if ($ret == 1)
 	{
 		$ret = set_new_password($login, $newpw);

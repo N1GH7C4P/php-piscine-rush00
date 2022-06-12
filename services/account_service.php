@@ -1,5 +1,6 @@
 <?php
 include_once "database_service.php";
+include_once "product_service.php"; 
 
 function set_new_password($login, $newpw)
 {
@@ -27,6 +28,8 @@ function create_account($login, $passwd, $connection)
 {
 	$hash = strtolower(hash('whirlpool', $passwd));
 	$query = "INSERT INTO `users` (`id`, `name`, `password`) VALUES (NULL,'".$login."','".$hash."')";
+	$user_id = get_id_by_login($login);
+	create_basket($user_id);
 	$connection->query($query);
 }
 
