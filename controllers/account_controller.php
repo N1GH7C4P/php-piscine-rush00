@@ -11,10 +11,11 @@
 		foreach ($_POST as $key => $value)
 		{
 			if($key === "login")
-				$login = $value;
+				$login = filter_var($value,  FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 			else if($key === "passwd")
-				$password = $value;
+				$password = filter_var($value,  FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 		}
+		
 		if($password === "")
 		{
 			echo("Error\n");

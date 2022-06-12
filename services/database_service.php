@@ -20,17 +20,12 @@ function init_database()
 
 	$conn = new mysqli($db_host, $db_user, $db_pass);
 	if ($conn->connect_error)
-	{
   		die("Connection failed: " . $conn->connect_error);
-	}
 	$sql = "CREATE DATABASE ".$db_name;
 	if ($conn->query($sql) === TRUE)
 		echo "Database created successfully";
 	else
-	{
-		echo "Error creating database: " . $conn->error;
-		die(-1);
-	}
+		die("Error creating database: " . $conn->error);
 	$conn = connect_to_database();
 	$fp = file('database/rush00_original.sql', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 	$query = '';

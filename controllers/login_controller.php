@@ -12,9 +12,9 @@
 		foreach ($_POST as $key => $value)
 		{
 			if($key === "login")
-				$login = $value;
+				$login = filter_var($value,  FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 			else if($key === "passwd")
-				$passwd = $value;
+				$passwd = filter_var($value,  FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 		}
 		$ret = auth($login, $passwd);
 		if ($ret == 1)

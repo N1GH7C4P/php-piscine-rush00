@@ -5,12 +5,12 @@
 	foreach ($_GET as $key => $value)
 	{
 		if ($key === "product_id")
-			$product_id = $value;
+			$product_id = filter_var($value,  FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 	}
 	foreach ($_POST as $key => $value)
 	{
 		if($key === "quantity")
-			$quantity = $value;
+			$quantity = filter_var($value, FILTER_VALIDATE_INT);
 	}
 
 	$product = get_product_by_id($product_id);
