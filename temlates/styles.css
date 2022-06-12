@@ -1,0 +1,69 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-size: 16px;
+	font-family: "Montserrat", sans-serif;
+	color: #333;
+	padding: 10%;
+}
+
+/* PRODUCT STUFF */
+
+.product-container {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+	margin-top: 5%;
+}
+
+.product-card {
+	flex-basis: 20%;
+	padding: 1em 2em;
+	border: 1px solid #333;
+	border-radius: 30px;
+	text-align: center;
+	box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
+	margin: 0 20px 20px 0;
+}
+
+.product-name {
+	font-size: 80%;
+	text-align: center;
+	font-weight: 600;
+}
+
+.product-name h2 {
+	margin-bottom: 5px;
+}
+
+.product-img {
+	width: 100%;
+	margin: 2em 0;
+}
+
+.product-img img {
+	width: 75%;
+}
+
+.product-card form {
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+	align-items: center;
+	margin: 3em auto;
+}
+
+.product-card form > :nth-child(2) {
+	margin-bottom: 1em;
+}
+
+.product-card input[type="submit"] {
+	padding: 10px;
+	background: -webkit-linear-gradient(right, rgb(14, 138, 173), rgb(31, 90, 153));
+	border-style: none;
+	border-radius: 7px;
+}
