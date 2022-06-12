@@ -57,6 +57,16 @@
 		$connection->close();
 	}
 
+	function remove_basket($id)
+	{
+		$connection = connect_to_database();
+		$query = "DELETE * FROM `basket_item` WHERE `basket_id=`".$id.";";
+		$connection->query($query);
+		$query = "DELETE * FROM `basket` WHERE `id=`".$id.";";
+		$connection->query($query);
+		$connection->close();
+	}
+
 	function remove_basket_item($basket_id, $product_id)
 	{
 		$connection = connect_to_database();
