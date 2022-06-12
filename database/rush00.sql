@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: 11.06.2022 klo 13:50
--- Palvelimen versio: 10.4.21-MariaDB
--- PHP Version: 7.4.29
+-- Generation Time: Jun 12, 2022 at 10:56 AM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Rakenne taululle `basket`
+-- Table structure for table `basket`
 --
 
 CREATE TABLE `basket` (
@@ -37,7 +37,7 @@ CREATE TABLE `basket` (
 -- --------------------------------------------------------
 
 --
--- Rakenne taululle `basket_item`
+-- Table structure for table `basket_item`
 --
 
 CREATE TABLE `basket_item` (
@@ -51,7 +51,7 @@ CREATE TABLE `basket_item` (
 -- --------------------------------------------------------
 
 --
--- Rakenne taululle `images`
+-- Table structure for table `images`
 --
 
 CREATE TABLE `images` (
@@ -63,7 +63,7 @@ CREATE TABLE `images` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Vedos taulusta `images`
+-- Dumping data for table `images`
 --
 
 INSERT INTO `images` (`id`, `uploader_id`, `name`, `timestamp`, `is_profile_pic`) VALUES
@@ -98,7 +98,7 @@ INSERT INTO `images` (`id`, `uploader_id`, `name`, `timestamp`, `is_profile_pic`
 -- --------------------------------------------------------
 
 --
--- Rakenne taululle `order_details`
+-- Table structure for table `order_details`
 --
 
 CREATE TABLE `order_details` (
@@ -112,7 +112,7 @@ CREATE TABLE `order_details` (
 -- --------------------------------------------------------
 
 --
--- Rakenne taululle `order_products`
+-- Table structure for table `order_products`
 --
 
 CREATE TABLE `order_products` (
@@ -124,7 +124,7 @@ CREATE TABLE `order_products` (
 -- --------------------------------------------------------
 
 --
--- Rakenne taululle `products`
+-- Table structure for table `products`
 --
 
 CREATE TABLE `products` (
@@ -139,13 +139,13 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Vedos taulusta `products`
+-- Dumping data for table `products`
 --
 
 INSERT INTO `products` (`id`, `name`, `quantity`, `date_added`, `image_id`, `category`, `description`, `price`) VALUES
-(8, 'Anorak Black', 11, '2022-06-11 16:24:03', 8, 3, 'Water repellant taslan nylon. Comfy hand pockets. Deep zip on the right side. ', 285),
-(9, 'Basic Tee Blue', 11, '2022-06-11 16:26:32', 9, 2, 'Classic fit. 30% Hemp. 70% Organic Cotton.', 44),
-(10, 'Basic Tee White', 11, '2022-06-11 16:26:32', 10, 2, 'Classic fit. 30% Hemp. 70% Organic Cotton.', 44),
+(8, 'Anorak Black', 11, '2022-06-11 16:24:03', 8, 3, 'Water repellant taslan nylon jacket. Comfy hand pockets. Deep zip on the right side. ', 285),
+(9, 'Basic Tee Blue', 11, '2022-06-11 16:26:32', 9, 2, 'Classic fit tee. 30% Hemp. 70% Organic Cotton.', 44),
+(10, 'Basic Tee White', 11, '2022-06-11 16:26:32', 10, 2, 'Classic fit tee. 30% Hemp. 70% Organic Cotton.', 44),
 (11, 'Beanie Spruce', 11, '2022-06-11 16:29:29', 11, 4, 'Recycled Scottish cashmere yarn ribbed beanie.', 128),
 (12, 'Boxer Flower', 11, '2022-06-11 16:29:29', 12, 6, '100% Organic Cotton lightweight woven boxer short.', 34),
 (13, 'Boxer Shroom Olive', 11, '2022-06-11 16:31:29', 13, 6, '100% Organic Cotton lightweight woven boxer short.', 34),
@@ -166,14 +166,14 @@ INSERT INTO `products` (`id`, `name`, `quantity`, `date_added`, `image_id`, `cat
 (28, 'Socks Oatmeal', 11, '2022-06-12 08:19:20', 28, 6, 'Recycled cotton & organic cotton tie-dye yarn melange sock.', 28),
 (29, 'Socks Turmeric', 11, '2022-06-12 08:19:20', 29, 6, 'Organic cotton boot sock.', 28),
 (30, 'Socks White', 11, '2022-06-12 08:16:17', 30, 6, 'Ethically sourced Merino Wool house sock.', 28),
-(31, 'Tarvas Black', 11, '2022-06-12 08:16:17', 31, 5, 'Tarvas Black. Water repellant suede leather upper. Natural rubber sole. ', 290),
-(32, 'Tarvas Canvas', 11, '2022-06-12 08:12:33', 32, 5, 'Tarvas Canvas. Beeswax treated canvas upper. Natural rubber sole.', 275),
-(33, 'Tarvas Ochre', 11, '2022-06-12 08:12:33', 33, 5, 'Tarvas Ochre. Water repellant suede leather upper. Natural rubber sole.', 290);
+(31, 'Tarvas Black', 11, '2022-06-12 08:16:17', 31, 5, 'Tarvas Black Shoe. Water repellant suede leather upper. Natural rubber sole. ', 290),
+(32, 'Tarvas Canvas', 11, '2022-06-12 08:12:33', 32, 5, 'Tarvas Canvas Shoe. Beeswax treated canvas upper. Natural rubber sole.', 275),
+(33, 'Tarvas Ochre', 11, '2022-06-12 08:12:33', 33, 5, 'Tarvas Ochre Shoe. Water repellant suede leather upper. Natural rubber sole.', 290);
 
 -- --------------------------------------------------------
 
 --
--- Rakenne taululle `product_categories`
+-- Table structure for table `product_categories`
 --
 
 CREATE TABLE `product_categories` (
@@ -182,7 +182,7 @@ CREATE TABLE `product_categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Vedos taulusta `product_categories`
+-- Dumping data for table `product_categories`
 --
 
 INSERT INTO `product_categories` (`id`, `name`) VALUES
@@ -197,7 +197,7 @@ INSERT INTO `product_categories` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Rakenne taululle `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -207,7 +207,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Vedos taulusta `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `password`) VALUES
@@ -335,43 +335,43 @@ ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- Rajoitteet vedostauluille
+-- Constraints for dumped tables
 --
 
 --
--- Rajoitteet taululle `basket`
+-- Constraints for table `basket`
 --
 ALTER TABLE `basket`
   ADD CONSTRAINT `Users basket` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Rajoitteet taululle `basket_item`
+-- Constraints for table `basket_item`
 --
 ALTER TABLE `basket_item`
   ADD CONSTRAINT `Item in a basket` FOREIGN KEY (`basket_id`) REFERENCES `basket` (`id`),
   ADD CONSTRAINT `Items product` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 
 --
--- Rajoitteet taululle `images`
+-- Constraints for table `images`
 --
 ALTER TABLE `images`
   ADD CONSTRAINT `Image uploader` FOREIGN KEY (`uploader_id`) REFERENCES `users` (`id`);
 
 --
--- Rajoitteet taululle `order_details`
+-- Constraints for table `order_details`
 --
 ALTER TABLE `order_details`
   ADD CONSTRAINT `Customer` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Rajoitteet taululle `order_products`
+-- Constraints for table `order_products`
 --
 ALTER TABLE `order_products`
   ADD CONSTRAINT `Orders details` FOREIGN KEY (`order_id`) REFERENCES `order_details` (`id`),
   ADD CONSTRAINT `Orders products` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 
 --
--- Rajoitteet taululle `products`
+-- Constraints for table `products`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `Products category` FOREIGN KEY (`category`) REFERENCES `product_categories` (`id`),
